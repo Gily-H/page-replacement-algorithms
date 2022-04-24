@@ -106,21 +106,23 @@ class LinkedList {
   private void shiftMru(Node mru) {
     this.tail.next = mru;
     mru.previous = this.tail;
-    this.tail = mru;
+    this.tail = this.tail.next;
   }
 
   // shift a mru node from its position in the list to the tail of the list
   public void updateMostRecentlyUsed(Node mru) {
     Node previousNode;
     Node nextNode;
-    if (mru.previous != null && mru.next != null) {
+    if (mru.previous != null && mru.next != null) { // mru is somewhere in the middle of the list
       previousNode = mru.previous;
       nextNode = mru.next;
-
       previousNode.next = nextNode;
       nextNode.previous = previousNode;
-      this.shiftMru(mru);
+    } else if (mru.previous == null && mru.next != null) { // mru is the head of the list
+      this.head = this.head.next;
+      mru.next = null;
     }
+    this.shiftMru(mru); // update the position of MRU to end (tail) of the list
   }
 
   public Node removeMru() {
