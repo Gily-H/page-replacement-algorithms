@@ -1,4 +1,3 @@
-import java.awt.print.Pageable;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,10 +28,10 @@ public class MRU_Page_Replacement_Algorithm {
           // access the page to update when it was last used
           Node mru = frameMap.get(pageNumber);
           pageList.updateMostRecentlyUsed(mru);
-          System.out.printf("Page Number: %d\n", mru.getPageNumber());
+          System.out.printf("Successful request of Page: %d\n", mru.getPageNumber());
 
         } else { // page fault -- unable to find page in memory frame
-          System.out.printf("Page fault with page number: %d\n", pageNumber);
+          System.out.printf("Page fault while attempting to access page number: %d\n", pageNumber);
           pageFaultCount++;
 
           // add page when there is a free frame
@@ -147,10 +146,9 @@ class LinkedList {
 
 
 class MRU_TEST {
-
   public static void main(String[] args) {
     MRU_Page_Replacement_Algorithm test = new MRU_Page_Replacement_Algorithm();
-    System.out.printf("MRU - Total page faults: %d\n",
+    System.out.printf("\nMRU - Total page faults: %d\n",
         test.mru_algorithm(Paging_Constants.REFERENCE_STRING, Paging_Constants.FRAME_SET_CAPACITY));
   }
 }
